@@ -18,3 +18,5 @@ for i in S:
 
 output += temp                  # 마지막에도 더해줘야 한다. 
 print(output)
+
+# 다른 풀이 찾아보기 
