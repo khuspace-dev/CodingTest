@@ -19,7 +19,7 @@ def solution(s):
                 if comp == 1:
                     temp_length = len(first) 
                 else:
-                    temp_length += 1 + len(first)
+                    temp_length += len(first) + 1 # 숫자가 붙어서
                 
                 first = s[j : j+i]
                 comp = 1
@@ -27,7 +27,7 @@ def solution(s):
         if comp == 1:
             temp_length = len(first) 
         else:
-            temp_length += 1 + len(first)     
+            temp_length += len(first) + 1
 
         min_length = min(temp_length, min_length)
     return min_length
