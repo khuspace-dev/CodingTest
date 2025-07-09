@@ -46,7 +46,7 @@ while(True):
     if not (0 <= temp_x < N and 0 <= temp_y < N):   # 맵 벗어남 -> 죽음
         break
 
-    if maps[temp_x][temp_y] == 1:                   # 사과가 있다면?
+    if maps[temp_y][temp_x] == 1:                   # 사과가 있다면? # 세로 방향 이동 먼저 (y)!!
         snakes.appendleft((temp_x, temp_y))         # 머리만 새로 더하기, 기존 꼬리는 유지 (사과를 먹어서!)
     else: 
         snakes.appendleft((temp_x, temp_y))         # 머리 더하기
@@ -61,45 +61,3 @@ while(True):
             cur_d = (cur_d - 1) % 4                 # 왼쪽은 동 -> 북 ... 즉 - 1
  
 print(seconds)
-
-
-
-# first trial
-# N = int(input())
-# K = int(input())
-# apples = [list(map(int, input().split())) for _ in range(K)]
-
-# L = int(input())
-# moves = [input().split() for _ in range(L)]
-
-# seconds = 0
-# maps = [N][N]
-
-# # apples maps에 표기하기 
-
-# head = [1, 1]
-# tail = [1, 1]
-
-# cur_d = 0 # 초기 방향은 오른쪽 
-# direction = [0, 1, 2, 3] # 동, 남, 서, 북 
-
-# dx = [1, 0, -1, 0]
-# dy = [0, 1, 0, -1]
-
-# while(True):
-#     if head[0] >= N or head[1] >= N or tail[0] >= N or tail[1] >= N:
-#         break
-
-#     head[0] += dx[cur_d] 
-#     head[1] += dy[cur_d]
-
-#     if maps[head[0]][head[1]] == 1: 
-#         seconds += 1 
-#     else:
-#         tail[0] += dx[cur_d] 
-#         tail[1] += dy[cur_d]
-#         seconds += 1 
-
-#     # 특정 seconds에서 회전하기 로직 추가 
-
-# print(seconds)
