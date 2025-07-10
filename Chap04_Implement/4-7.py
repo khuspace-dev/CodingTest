@@ -48,6 +48,7 @@ while(True):
 
     if maps[temp_y][temp_x] == 1:                   # 사과가 있다면? # 세로 방향 이동 먼저 (y)!!
         snakes.appendleft((temp_x, temp_y))         # 머리만 새로 더하기, 기존 꼬리는 유지 (사과를 먹어서!)
+        maps[temp_y][temp_x] = 0
     else: 
         snakes.appendleft((temp_x, temp_y))         # 머리 더하기
         snakes.pop()                                # 꼬리는 제거하기 (사과 못먹어서, 길이 유지)
