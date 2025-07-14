@@ -15,10 +15,10 @@ for start_node, end_node in [list(map(int, input().split())) for _ in range(M)]:
     graph[start_node].append(end_node)
 
 cities = []
-visited = [False] * (N + 1)
+# visited = [False] * (N + 1)
 
 def dfs(node, depth):
-    visited[node] = True # 방문 처리 
+    # visited[node] = True # 방문 처리 
 
     if depth == K:
         cities.append(node)
@@ -27,9 +27,9 @@ def dfs(node, depth):
         # depth += 1 # next 깊이 update 
 
         for next_node in graph[node]:
-            if visited[next_node] == False:
-                dfs(next_node, depth + 1)       # 다른 경로에서도 이 노드에 접근 가능하도록, 
-                visited[next_node] = False      # 현재 경로 탐색 이후, False로 되돌리기
+            # if visited[next_node] == False:
+            dfs(next_node, depth + 1)       # 다른 경로에서도 이 노드에 접근 가능하도록, 
+                # visited[next_node] = False      # 현재 경로 탐색 이후, False로 되돌리기
 
 dfs(X, 0) # 출발 도시 X, 초기 depth = 0 
 cities.sort()
@@ -39,3 +39,5 @@ if len(cities) == 0:
 else:
     for city in cities:
         print(city)
+
+# 이렇게 구현하면 1 -> 3 길이 1인데, 1 -> 2 -> 3 이건 길이가 2라서 3도 출력되어버린다.!
