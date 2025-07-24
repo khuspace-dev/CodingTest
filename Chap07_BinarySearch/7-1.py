@@ -5,7 +5,7 @@ ex) input_data = sys.stdin.readline().rstrip() -> enter 제거
 '''
 
 # 부품 찾기 
-# chap6. 197 page
+# chap7. 197 page
 
 # 부품 N개, 손님이 M개 부품번호 요청
 
