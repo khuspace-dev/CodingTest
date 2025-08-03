@@ -1,5 +1,6 @@
 # 도시 분할 계획
 # chap10. 300 page
+# https://www.acmicpc.net/problem/1647
 
 # N개의 집, M개의 길 (무방향)
 # 마을을 2개로 분할 + 길은 최소 비용으로
@@ -7,6 +8,10 @@
 
 # A, B, C(cost)
 # 길을 없애고 남은 최소 유지비(cost) 출력 
+
+# 백준 시간초과 -> input sys로 받기 
+import sys
+input = sys.stdin.readline 
 
 N, M = map(int, input().split())
 parent = [0] * (N + 1)
@@ -41,7 +46,7 @@ for i in range(M):
 # 정렬하기
 edges.sort()
 
-# 제일 마지막 cost가 최댓값 -> 얘를 준으로 끊으면 됨 
+# 제일 마지막 cost가 최댓값 -> 얘를 기준으로 끊으면 됨 
 max_cost = 0
 
 # 크루스칼 알고리즘 
