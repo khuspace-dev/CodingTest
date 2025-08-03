@@ -1,52 +1,74 @@
 # 화성 탐사
 # chap9. 388 page
 
-# 다익스트라 최소비용 -> heapq 구현
-
+import sys
 import heapq
 
-T = int(input())
+input = sys.stdin.readline
 
-n, m = map(int, input().split())
-start = int(input())
-
-graph = [[] for i in range(n + 1)]
+# 동 남 서 북 
+dx = [1, 0, -1, 0]
+dy = [0, -1, 0, 1]
 
 INF = int(1e9)
-distance = [INF] * (n + 1)
 
-# 간선 정보 채우기
-for _ in range(m):
-    a, b, c = map(int, input().split()) 
-    graph[a].append((b, c))
-
-def dijkstra(start):
+def dijkstra(graph, distance):
     q = []
-    # 시작 노드 최단 경로 비용은 0 (거리가 먼저 들어가도록!)
-    heapq.heappush(q, (0, start))
-    distance[start] = 0
+    # 비용(이거 기준 최소힙), x, y -> 좌표가 필요함
+    heapq.heappush(q, (graph[0][0], 0, 0))
+    distance[0][0] = graph[0][0] 
 
     while q:
-        # 가장 최단거리 짧은 노드 꺼내기 -> 우선순위 큐
-        dist, now = heapq.heappop(q)
+        # cost 작은 노드 pop
+        dist, x, y = heapq.heappop(q)
 
-        # 이미 처리된 노드 -> 무시
-        if distance[now] < dist:
+        if distance[x][y] < dist:
             continue
 
-        # 현재 노드와 연결된 다른 인접 노드 확인 
-        for i in graph[now]:
-            cost = dist + i[1] # 지금까지의 거리 더해서 계산하니까
+        for i in range(4):
+            # 다른 인접 노드를 탐색하는 과정
+            temp_x = x + dx[i]
+            temp_y = y + dy[i]
 
-            # 지금 노드 거쳐가는게 더 짧을 때 
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+            if (0 <= temp_x < N and 0 <= temp_y < N): # N-1 까지만 가능 
+                cost = dist + graph[temp_x][temp_y]
 
-dijkstra(start)
+                if cost < distance[temp_x][temp_y]:
+                    distance[temp_x][temp_y] = cost 
+                    heapq.heappush(q, (cost, temp_x, temp_y))
 
-for i in range(1, n + 1):
-    if distance[i] == INF:
-        print("infinity")
-    else:
-        print(distance[i])
+    return distance[N - 1][N - 1]
+
+
+T = int(input()) # test case 
+
+for _ in range(T):
+    N = int(input())
+    temp_graph = [list(map(int, input().split())) for _ in range(N)]
+    temp_distance = [[INF] * N for _ in range(N)] # 2차원 결과를 저장하도록
+
+    output = dijkstra(temp_graph, temp_distance)
+    print()
+    print(output)
+
+'''
+3 
+3 
+5 5 4
+3 9 1
+3 2 7
+5
+3 7 2 0 1
+2 8 0 9 1
+1 2 1 8 1
+9 8 9 2 0
+3 6 5 1 5
+7
+9 0 5 1 1 5 3
+4 1 2 1 6 5 3
+0 7 6 1 6 8 5
+1 1 7 8 3 2 3
+9 4 0 7 6 4 1
+5 8 3 2 4 8 3
+7 4 8 4 8 3 4
+'''
