@@ -31,9 +31,22 @@ def union(parent, x, y):
     else:
         parent[y] = x
 
-for i in range (i, N + 1):
+for i in range (1, N + 1):
     input_list = list(map(int, input().split()))
 
-    # N 칸의 Parent 관계 연결해주기
+    for j in range(1, N + 1):
+        # 여기서는 index가 0부터 적용되어야하니까 (index 주의)
+        if input_list[j - 1] == 1:
+            union(parent, i, j)
 
+# 경로 -> find를 써야 함 
+path = list(map(int, input().split()))
 
+origin = find(parent, path[0])
+
+for j in path[1:]:
+    if find(parent, j) != origin:
+        print("NO")
+        break
+else:
+    print("YES")
